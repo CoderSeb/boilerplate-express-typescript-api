@@ -1,5 +1,7 @@
 import express from 'express'
+import createError from 'http-errors'
 import { apiRouter } from './api/router.js'
+
 
 const router = express.Router()
 
@@ -10,7 +12,7 @@ router.get('/', (req: express.Request, res: express.Response) => {
 })
 
 router.use('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  res.status(404).send('Not Found')
+  next(createError(404))
 })
 
 export { router as indexRouter }
